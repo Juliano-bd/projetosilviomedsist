@@ -105,6 +105,7 @@
         <div>
             <label>Médico:</label><br/>
             <select th:field="*{medico}">
+                <option value="">Selecione o Médico</option>
                 <option th:each="medico : ${medico}" th:value="${medico.id}" th:text="${medico.nome + '('+ medico.especialidade +')'}"></option>
             </select>
         </div>
