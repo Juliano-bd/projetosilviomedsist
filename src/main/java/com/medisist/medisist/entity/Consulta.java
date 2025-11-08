@@ -19,7 +19,9 @@ public class Consulta {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date dataConsulta;
 
-    private String paciente;
+    @ManyToOne
+    @JoinColumn(name = "paciente_id", nullable = false)
+    private Paciente paciente;
 
     private String observacoes;
 

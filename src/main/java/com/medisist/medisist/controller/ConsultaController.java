@@ -3,6 +3,7 @@ package com.medisist.medisist.controller;
 import com.medisist.medisist.entity.Consulta;
 import com.medisist.medisist.repository.ConsultaRepository;
 import com.medisist.medisist.repository.MedicoRepository;
+import com.medisist.medisist.repository.PacienteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,6 +19,9 @@ public class ConsultaController {
     @Autowired
     private MedicoRepository medicoRepository;
 
+    @Autowired
+    private PacienteRepository pacienteRepository;
+
     @GetMapping
     public String listarConsultas(Model model) {
         model.addAttribute("consultas", consultaRepository.findAll());
@@ -28,6 +32,7 @@ public class ConsultaController {
     public String novaConsultaForm(Model model) {
         model.addAttribute("consulta", new Consulta());
         model.addAttribute("medico", medicoRepository.findAll());
+        model.addAttribute("pacientes", pacienteRepository.findAll());
         return "form-consulta";
     }
 
@@ -43,6 +48,7 @@ public class ConsultaController {
                 .orElseThrow(() -> new IllegalArgumentException("ID de Consulta inválido:" + id));
         model.addAttribute("consulta", consulta);
         model.addAttribute("medico", medicoRepository.findAll());
+        model.addAttribute("pacientes", pacienteRepository.findAll());
         return "form-consulta";
     }
 
