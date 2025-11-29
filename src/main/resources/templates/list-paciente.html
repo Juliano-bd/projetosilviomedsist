@@ -85,6 +85,7 @@
             <th>Nome</th>
             <th>Telefone</th>
             <th>CPF</th>
+            <th>Exames</th>
             <th>Ações</th>
         </tr>
         </thead>
@@ -93,6 +94,12 @@
             <td th:text="${paciente.nome}"></td>
             <td th:text="${paciente.telefone}"></td>
             <td th:text="${paciente.cpf}"></td>
+            <td>
+    <span th:each="exame, iterStat : ${paciente.exames}">
+        <span th:text="${exame.nomeExame}"></span><span th:if="${!iterStat.last}">, </span>
+    </span>
+                <span th:if="${#lists.isEmpty(paciente.exames)}" style="color: #999;">-</span>
+            </td>
             <td>
                 <a th:href="@{/pacientes/editar/{id}(id=${paciente.id})}">Editar</a>
                 |

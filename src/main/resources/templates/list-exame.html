@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Lista de Exames</title>
+    <style>
+        body { font-family: sans-serif; padding: 20px; background-color: #f4f7f6; display: flex; justify-content: center; }
+        .container { background: white; padding: 30px; border-radius: 8px; width: 100%; max-width: 600px; }
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+        th, td { padding: 10px; border-bottom: 1px solid #ddd; text-align: left; }
+        .btn { background-color: #3498db; color: white; padding: 10px; text-decoration: none; border-radius: 4px; }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>Catálogo de Exames</h1>
+    <a href="/exames/novo" class="btn">Novo Tipo de Exame</a>
+    <a href="/agenda" style="margin-left: 10px;">Voltar</a>
+    <table>
+        <thead><tr><th>ID</th><th>Nome</th><th>Ações</th></tr></thead>
+        <tbody>
+        <tr th:each="exame : ${exames}">
+            <td th:text="${exame.id}"></td>
+            <td th:text="${exame.nomeExame}"></td>
+            <td><a th:href="@{/exames/excluir/{id}(id=${exame.id})}" style="color: red;">Excluir</a></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

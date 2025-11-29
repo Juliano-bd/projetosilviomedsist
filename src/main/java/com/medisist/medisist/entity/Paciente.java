@@ -12,8 +12,8 @@ import java.util.List;
 @Table(name = "paciente")
 @Getter
 @Setter
-@ToString(exclude = "consultas")
-@EqualsAndHashCode(exclude = "consultas")
+@ToString(exclude = {"consultas", "exames"})
+@EqualsAndHashCode(exclude = {"consultas", "exames"})
 public class Paciente {
 
     @Id
@@ -23,12 +23,20 @@ public class Paciente {
     @Column(nullable = false)
     private String nome;
 
-    @Column(nullable = true) // Telefone pode ser opcional
+    @Column(nullable = true)
     private String telefone;
 
-    @Column(nullable = false, unique = true) // CPF deve ser único
+    @Column(nullable = false, unique = true)
     private String cpf;
 
     @OneToMany(mappedBy = "paciente", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Consulta> consultas;
+
+    @ManyToMany
+    @JoinTable(
+            name = "paciente_exame",
+            joinColumns = @JoinColumn(name = "paciente_id"),
+            inverseJoinColumns = @JoinColumn(name = "exame_id")
+    )
+    private List<Exame> exames;
 }

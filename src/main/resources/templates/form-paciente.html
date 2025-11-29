@@ -87,6 +87,19 @@
             <label>CPF:</label><br/>
             <input type="text" th:field="*{cpf}" required />
         </div>
+        <div style="margin-top: 20px; padding: 10px; border: 1px solid #ddd; border-radius: 4px;">
+            <label style="font-size: 1.1em; color: #3498db;">Exames Realizados:</label><br/>
+            <div th:each="exameItem : ${listaExames}">
+                <input type="checkbox"
+                       th:field="*{exames}"
+                       th:value="${exameItem.id}"
+                       th:id="${'exame_' + exameItem.id}" />
+                <label th:for="${'exame_' + exameItem.id}" th:text="${exameItem.nomeExame}" style="display:inline; font-weight:normal;"></label>
+            </div>
+            <div th:if="${#lists.isEmpty(listaExames)}" style="color: orange;">
+                Nenhum tipo de exame cadastrado. <a href="/exames/novo" target="_blank">Cadastre aqui</a>.
+            </div>
+        </div>
         <button type="submit">SALVAR AGORA!</button>
     </form>
     <br/>

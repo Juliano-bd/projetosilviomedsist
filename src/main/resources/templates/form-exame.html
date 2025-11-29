@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Cadastro de Exame</title>
+    <style>
+        body { font-family: sans-serif; padding: 20px; background-color: #f4f7f6; display: flex; justify-content: center; }
+        .container { background: white; padding: 30px; border-radius: 8px; width: 100%; max-width: 400px; }
+        input { width: 100%; padding: 10px; margin-bottom: 10px; box-sizing: border-box; }
+        button { width: 100%; padding: 10px; background-color: #2ecc71; color: white; border: none; cursor: pointer; }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>Dados do Exame</h1>
+    <form th:action="@{/exames/salvar}" th:object="${exame}" method="post">
+        <input type="hidden" th:field="*{id}" />
+        <label>Nome do Exame:</label>
+        <input type="text" th:field="*{nomeExame}" placeholder="Ex: Hemograma Completo" required />
+        <button type="submit">Salvar</button>
+    </form>
+    <br/><a href="/exames">Cancelar</a>
+</div>
+</body>
+</html>

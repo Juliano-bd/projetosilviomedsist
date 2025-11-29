@@ -1,6 +1,7 @@
 package com.medisist.medisist.controller;
 
 import com.medisist.medisist.entity.Paciente;
+import com.medisist.medisist.service.ExameService;
 import com.medisist.medisist.service.PacienteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,6 +14,8 @@ public class PacienteController {
 
     @Autowired
     private PacienteService pacienteService;
+    @Autowired
+    private ExameService exameService;
 
     @GetMapping
     public String listarPacientes(Model model) {
@@ -23,6 +26,7 @@ public class PacienteController {
     @GetMapping("/novo")
     public String novoPacienteForm(Model model) {
         model.addAttribute("paciente", new Paciente());
+        model.addAttribute("listaExames", exameService.findAll());
         return "form-paciente";
     }
 
@@ -37,6 +41,7 @@ public class PacienteController {
         Paciente paciente = pacienteService.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("ID de Paciente inválido:" + id));
         model.addAttribute("paciente", paciente);
+        model.addAttribute("listaExames", exameService.findAll());
         return "form-paciente";
     }
 
